@@ -11,11 +11,11 @@ class PersonController extends Controller
     public function indexAction($id)
     {
 
-        $user=new User();
-        $user->all();
-
-
-
+        $user = new User();
+        $q = $user->all();
+        if ($q->getNumRows()) {
+            var_dump($q->getRows());
+        }
 
 
         //echo $id;

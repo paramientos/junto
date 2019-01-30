@@ -8,6 +8,11 @@ use Fleshgrinder\Core\Formatter;
 
 class Model
 {
+
+    private $row;
+    private $rows;
+    private $num_rows;
+
     /**
      * Veritabanını nesnesini tutar
      * @var void
@@ -31,15 +36,13 @@ class Model
         $backtrace = debug_backtrace();
         if (!empty($backtrace[0]['object']->table)) {
             $tableName = $backtrace[0]['object']->table;
+            // @TODO side-effects for table_name , will be fixed ??
             $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table_name' => $tableName]);
-            $q = $this->query($sql);
-            var_dump($q->rows);
+            $this->query($sql);
+            return $this;
         } else {
             throw new \Exception("Tablo adi girilmedi");
         }
-
-
-        return $this;
     }
 
 
@@ -52,11 +55,7 @@ class Model
                 while ($row = $query->fetch_assoc()) {
                     $data[] = $row;
                 }
-                /* $result = new \stdClass();
-                  $result->num_rows = $query->num_rows;
-                  $result->row = isset($data[0]) ? $data[0] : array();
-                  $result->rows = $data; */
-                global $rows, $row, $num_rows;
+
                 $this->num_rows = $query->num_rows;
                 $this->row = isset($data[0]) ? $data[0] : array();
                 $this->rows = $data;
@@ -89,5 +88,29 @@ class Model
     public function __destruct()
     {
         $this->link->close();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRow()
+    {
+        return $this->row;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumRows()
+    {
+        return $this->num_rows;
     }
 }
