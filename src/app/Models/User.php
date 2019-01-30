@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Endocore\Core\IModel;
 use Endocore\Core\Model;
 
 /**
@@ -13,6 +12,7 @@ class User extends Model
 {
 
     public $table = 'user';
+
 
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\Area;
 use Endocore\Core\Controller;
 
 class PersonController extends Controller
@@ -11,9 +11,9 @@ class PersonController extends Controller
     public function indexAction($id)
     {
 
-        $user = new User();
-        $q = $user->all()->getRows();
-        var_dump($q);
+        $area = new Area();
+        var_dump($area->all()->getRows());
+
 
         //$user=$this->model('user');
         //var_dump($user->all()->getRows());

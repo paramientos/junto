@@ -72,6 +72,8 @@ class App
             $whoops->pushHandler($errorPage);
             $whoops->register();
         }
+
+
     }
 
     /**

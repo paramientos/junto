@@ -30,27 +30,35 @@ class Model implements IModel
         }
         $this->link->set_charset(AppConfig::DB_CHARSET);
         $this->link->query("SET SQL_MODE = ''");
+
         return $this;
     }
 
     final public function all()
     {
-        $backtrace = debug_backtrace();
-        if (!empty($this->diModel)) {
-            $tableName = $this->diModel->table;
-        } elseif (!empty($backtrace[0]['object']->table)) {
-            $tableName = $backtrace[0]['object']->table;
-        } else {
-            throw new \Exception("Tablo adi girilmedi");
-        }
-
         // @TODO side-effects for table_name , will be fixed ??
-        $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table_name' => $tableName]);
+        $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table' => $this->getTableName()]);
         $this->query($sql);
         return $this;
 
     }
 
+    private function getTableName()
+    {
+        $backtrace = debug_backtrace();
+
+
+        if (!empty($this->diModel)) {
+            return $this->diModel->table;
+        } elseif (!empty($backtrace[0]['object']->table)) {
+            return $backtrace[0]['object']->table;
+        } else if (empty($backtrace[0]['object']->table) && empty($this->diModel)) {
+            $namespace = explode('\\', get_called_class());
+            return strtolower(array_pop($namespace));
+        } else {
+            throw new \Exception("Tablo adi girilmedi");
+        }
+    }
 
     public function query($sql)
     {
