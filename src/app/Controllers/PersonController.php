@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Post;
+use App\Models\User;
 use Endocore\Core\Controller;
 
 class PersonController extends Controller
@@ -10,9 +10,10 @@ class PersonController extends Controller
 
     public function indexAction($id)
     {
-        $post = new Post();
-        var_dump($post->getAll());
-        echo $post->count_affected();
+
+        $user=new User();
+        $user->all();
+
 
 
 

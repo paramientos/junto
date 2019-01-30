@@ -8,8 +8,11 @@ use Endocore\Core\Model;
  * Örnek bir model dosyası
  * post tablosunu temsil edecek
  */
-class Post extends Model
+class User extends Model
 {
+
+    protected $table = 'user';
+
     /**
      * Bütün gönderileri (postları) getirmesini sağlayalım
      * $this->fetchAll'ı genişlettiğimiz (extend) model sınıfı aracılığıyla kullanıyoruz

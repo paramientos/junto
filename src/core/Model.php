@@ -3,6 +3,8 @@
 namespace Endocore\Core;
 
 use Endocore\App\Configs\AppConfig;
+use Endocore\Core\Constants\Dml;
+use Fleshgrinder\Core\Formatter;
 
 class Model
 {
@@ -21,7 +23,25 @@ class Model
         }
         $this->link->set_charset(AppConfig::DB_CHARSET);
         $this->link->query("SET SQL_MODE = ''");
+        return $this;
     }
+
+    final public function all()
+    {
+        $backtrace = debug_backtrace();
+        if (!empty($backtrace[0]['object']->table)) {
+            $tableName = $backtrace[0]['object']->table;
+            $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table_name' => $tableName]);
+            $q = $this->query($sql);
+            var_dump($q->rows);
+        } else {
+            throw new \Exception("Tablo adi girilmedi");
+        }
+
+
+        return $this;
+    }
+
 
     public function query($sql)
     {

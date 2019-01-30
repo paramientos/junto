@@ -2,7 +2,8 @@
 
 namespace Endocore\App\Configs;
 
-use Endocore\Constants\Constants;
+
+use Endocore\Core\Constants\Environment;
 
 class AppConfig
 {
@@ -11,7 +12,7 @@ class AppConfig
     const VERSION = '1.1';
     const DS = DIRECTORY_SEPARATOR;
 
-    const ENV = Constants::DEV;
+    const ENV = Environment::DEV;
 
     const BASE_URL = 'http://localhost/endocore'; // Sistemin çalışacağı URL
 
