@@ -11,8 +11,10 @@ class PersonController extends Controller
     public function indexAction($id)
     {
 
-        $area = new Area();
-        //var_dump($area->all()->getRows());
+        $areas = Area::all();
+        foreach ($areas as $area) {
+            echo $area->area_id;
+        }
 
 
         //$user=$this->model('user');

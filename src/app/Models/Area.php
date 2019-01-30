@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Endocore\Core\Model;
 
-
-class Area extends Model
+class Area extends \ActiveRecord\Model
 {
-    protected $table = 'area';
+    static $table_name = 'area';
 
 }

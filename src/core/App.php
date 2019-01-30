@@ -74,6 +74,19 @@ class App
         }
 
 
+        \ActiveRecord\Config::initialize(function ($cfg) {
+            $cfg->set_model_directory(AppConfig::MDIR);
+            $cfg->set_connections(
+                array(
+                    Constants\Environment::DEV => 'mysql://root:1@localhost/blsh',
+                    Constants\Environment::TEST => 'mysql://username:password@localhost/test_database_name',
+                    Constants\Environment::PROD => 'mysql://username:password@localhost/production_database_name'
+                )
+            );
+            $cfg->set_default_connection(AppConfig::ENV);
+        });
+
+
     }
 
     /**
