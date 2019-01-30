@@ -1,0 +1,24 @@
+{
+  "name": "soysaltan/endocore",
+  "description": "Endocore PHP Micro Framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Soysal Tan",
+      "email": "soysaltann@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "filp/whoops": "^2.3",
+    "marc-mabe/php-enum": "^3.0",
+    "fleshgrinder/format": "^1.1",
+    "php-activerecord/php-activerecord": "^1.2"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
