@@ -12,7 +12,7 @@ class PersonController extends Controller
     {
 
         $area = new Area();
-        var_dump($area->all()->getRows());
+        //var_dump($area->all()->getRows());
 
 
         //$user=$this->model('user');
