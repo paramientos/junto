@@ -6,7 +6,7 @@ use Endocore\App\Configs\AppConfig;
 use Endocore\Core\Constants\Dml;
 use Fleshgrinder\Core\Formatter;
 
-class Model
+class Model implements IModel
 {
 
     private $row;
@@ -18,9 +18,11 @@ class Model
      * @var void
      */
     private $link;
+    private $diModel;
 
-    public function __construct()
+    public function __construct(IModel $model = null)
     {
+        $this->diModel = $model;
         $this->link = new \mysqli(AppConfig::DB_HOST, AppConfig::DB_USR, AppConfig::DB_PWD, AppConfig::DB_NAME, AppConfig::DB_PORT);
         if ($this->link->connect_error) {
             trigger_error('Error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
@@ -34,15 +36,19 @@ class Model
     final public function all()
     {
         $backtrace = debug_backtrace();
-        if (!empty($backtrace[0]['object']->table)) {
+        if (!empty($this->diModel)) {
+            $tableName = $this->diModel->table;
+        } elseif (!empty($backtrace[0]['object']->table)) {
             $tableName = $backtrace[0]['object']->table;
-            // @TODO side-effects for table_name , will be fixed ??
-            $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table_name' => $tableName]);
-            $this->query($sql);
-            return $this;
         } else {
             throw new \Exception("Tablo adi girilmedi");
         }
+
+        // @TODO side-effects for table_name , will be fixed ??
+        $sql = Formatter::format(Dml::SELECT_ALL_FROM, ['table_name' => $tableName]);
+        $this->query($sql);
+        return $this;
+
     }
 
 

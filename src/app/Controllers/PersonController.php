@@ -12,11 +12,11 @@ class PersonController extends Controller
     {
 
         $user = new User();
-        $q = $user->all();
-        if ($q->getNumRows()) {
-            var_dump($q->getRows());
-        }
+        $q = $user->all()->getRows();
+        var_dump($q);
 
+        //$user=$this->model('user');
+        //var_dump($user->all()->getRows());
 
         //echo $id;
         //redirect('default','index');

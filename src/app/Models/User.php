@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Endocore\Core\IModel;
 use Endocore\Core\Model;
 
 /**
@@ -11,18 +12,8 @@ use Endocore\Core\Model;
 class User extends Model
 {
 
-    protected $table = 'user';
+    public $table = 'user';
 
-    /**
-     * Bütün gönderileri (postları) getirmesini sağlayalım
-     * $this->fetchAll'ı genişlettiğimiz (extend) model sınıfı aracılığıyla kullanıyoruz
-     * @return array
-     */
-    public function getAll()
-    {
-        $q = $this->query('SELECT * FROM user u');
-        if ($q->num_rows) {
-            return $q->rows;
-        }
-    }
+
+
 }
