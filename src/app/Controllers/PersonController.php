@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use Endocore\Core\Controller;
 
 class PersonController extends Controller
@@ -9,10 +10,17 @@ class PersonController extends Controller
 
     public function indexAction($id)
     {
-        echo $id;
+        $post = new Post();
+        var_dump($post->getAll());
+        echo $post->count_affected();
+
+
+
+
+        //echo $id;
         //redirect('default','index');
         //var_dump($this->url->redirect('default', 'index'));
-        var_dump($this->request->get);
+        //var_dump($this->request->get);
         /*$data['title'] = 'Person';
         $data['text'] = 'Person sayfasından merhaba!';
 

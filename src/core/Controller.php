@@ -70,19 +70,20 @@ class Controller
          * Eğer model dosyası varsa
          * çağırıp döndürelim
          */
-        if (file_exists($file = MDIR . DS . "{$model}.php")) {
+        if (file_exists($file = AppConfig::MDIR . AppConfig::DS . ucfirst($model) . ".php")) {
             require_once $file;
             /**
              * Eğer model sınıfı tanımlıysa
              * model sınıfını döndür
              */
-            if (class_exists($model)) {
-                return new $model;
+            $class = '\\App\\Models\\' . ucfirst($model);
+            if (class_exists($class)) {
+                return new $class;
                 /**
                  * Model sınıfı tanımlı değilse programı durdur
                  */
             } else {
-                exit("Model dosyasında sınıf tanımlı değil: $model");
+                exit("Model dosyasında sınıf tanımlı değil: $class");
             }
             /**
              * Eğer sınıf yoksa, hata döndürelim

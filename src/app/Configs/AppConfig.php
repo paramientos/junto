@@ -2,6 +2,8 @@
 
 namespace Endocore\App\Configs;
 
+use Endocore\Constants\Constants;
+
 class AppConfig
 {
 
@@ -9,7 +11,9 @@ class AppConfig
     const VERSION = '1.1';
     const DS = DIRECTORY_SEPARATOR;
 
-    const BASE_URL = 'http://localhost/endo'; // Sistemin çalışacağı URL
+    const ENV = Constants::DEV;
+
+    const BASE_URL = 'http://localhost/endocore'; // Sistemin çalışacağı URL
 
     //tum hardcodedlar dynamic olacak constants yani
     const ROOT_DIR = __DIR__ . '/..'; // Kök dizin
@@ -19,9 +23,9 @@ class AppConfig
     //const CORE_DIR = Config::ROOT_DIR . Config::DS . 'core'; // Çekirdek dizini
     const HELPERS_DIR = self::APP_DIR . self::DS . 'Helpers'; // Helpers dizini
     const LIBRARIES_DIR = self::APP_DIR . self::DS . 'Libraries'; // Helpers dizini
-    const MDIR = self::APP_DIR . self::DS . 'models'; // Model dizini
-    const VDIR = self::APP_DIR . self::DS . 'views'; // View dizini
-    const CDIR = self::APP_DIR . self::DS . 'controllers'; // Controller dizini
+    const MDIR = self::APP_DIR . self::DS . 'Models'; // Model dizini
+    const VDIR = self::APP_DIR . self::DS . 'Views'; // View dizini
+    const CDIR = self::APP_DIR . self::DS . 'Controllers'; // Controller dizini
 
 
     const HEADER_FILE = 'header.php';// header file.
@@ -29,8 +33,12 @@ class AppConfig
 
 // Veritabanı ayarlamalarını yapıyoruz
 // Eğer ki veritabanı işlemi yapmayacaksak ayarlamak şart değil
-    const DB_DSN = 'mysql:host=localhost;dbname=blog;charset=utf8';
+    const DB_TYPE = 'mysqli';
+    const DB_HOST = 'localhost';
     const DB_USR = 'root';
-    const DB_PWD = 'root';
+    const DB_PWD = '1';
+    const DB_NAME = 'blsh';
+    const DB_PORT = '3306';
+    const DB_CHARSET = 'utf8';
 
 }

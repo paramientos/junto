@@ -5,6 +5,7 @@ namespace Endocore\Core;
 use Endocore\App\Configs\AppConfig;
 use Endocore\App\IRoute;
 use Endocore\App\Route;
+use Endocore\Constants\Constants;
 
 class App
 {
@@ -60,6 +61,24 @@ class App
          * Rotaları sınıfa dahil ediyoruz, başka bir metod içinde kullanmak üzere
          */
         $this->routes = Route::$routes;
+
+        if (AppConfig::ENV == Constants::DEV) {
+            $whoops = new \Whoops\Run();
+
+            // Configure the PrettyPageHandler:
+            $errorPage = new \Whoops\Handler\PrettyPageHandler();
+
+            $errorPage->setPageTitle("It's broken!"); // Set the page's title
+            $errorPage->setEditor("sublime");         // Set the editor used for the "Open" link
+            $errorPage->addDataTable("Extra Info", array(
+                "stuff" => 123,
+                "foo" => "bar",
+                "useful-id" => "baloney"
+            ));
+
+            $whoops->pushHandler($errorPage);
+            $whoops->register();
+        }
     }
 
     /**
