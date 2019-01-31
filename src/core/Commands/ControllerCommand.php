@@ -19,7 +19,8 @@ class ControllerCommand extends Command
         $this->setName('c:c')
             ->setDescription('Generates controller file.')
             ->setHelp('Generates a controller file in the Controllers folder.')
-            ->addArgument('controllerName', InputArgument::OPTIONAL, 'Controller name to generate');
+            ->addArgument('controllerName', InputArgument::OPTIONAL, 'Controller name to generate')
+            ->addArgument('o', InputArgument::OPTIONAL, 'Overwrite the existing controller file', false);
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -38,9 +39,20 @@ class ControllerCommand extends Command
                 'Ext' => Extension::PHP
             ]);
 
-        if (file_exists($controllerFileName)) {
+        if (file_exists($controllerFileName) && $input->getArgument('o') != 'o') {
             $output->write("<error>{$controllerName} controller already exists.</error>");
             return false;
+        }
+
+        if ($input->getArgument('o') == 'o') {
+            echo "Are you sure you want to overwrite the {$controllerName}Controller?  Y/N: ";
+            $handle = fopen("php://stdin", "r");
+            $line =  preg_replace('/\s/', '', fgets($handle));
+            echo $line;
+            if ($line!= 'Y' || $line != 'y') {
+                echo "ABORTING!\n";
+                exit;
+            }
         }
 
 
