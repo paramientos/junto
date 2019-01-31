@@ -17,7 +17,7 @@ class AppConfig
     const BASE_URL = 'http://localhost/endocore'; // Sistemin çalışacağı URL
 
     //tum hardcodedlar dynamic olacak constants yani
-    const ROOT_DIR = __DIR__ . '/app'; // Kök dizin
+    const ROOT_DIR = __DIR__ . '/..'; // Kök dizin
     const APP_DIR = self::ROOT_DIR; // Uygulama dizini
     const CONFIG_DIR = self::APP_DIR . self::DS . 'Configs'; // Conf dizini
     const INIT_CONFIG_FILE = self::CONFIG_DIR . self::DS . 'InitConfig.php'; // InitConfig file
