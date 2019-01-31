@@ -14,18 +14,19 @@ class UpdateCommand extends Command
     public function configure()
     {
         $this->setName('update')
-            ->setDescription('Greet a user based on the time of the day.')
-            ->setHelp('This command allows you to greet a user based on the time of the day...')
-            ->addArgument('o', InputArgument::OPTIONAL, 'You can use o for optimize the process');
+            ->setDescription('This command runs the composer dump-autoload script.')
+            ->setHelp('With this command you can manage the dependencies through the composer.')
+            ->addArgument('o', InputArgument::OPTIONAL, 'You can use <info>o</info> for optimize the process');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->update($input, $output);
+        $this->command($input, $output);
     }
 
-    protected function update(InputInterface $input, OutputInterface $output)
+    protected function command(InputInterface $input, OutputInterface $output)
     {
+        //@TODO check composer whether installed or not
         $command = 'composer dump-autoload' . ($input->getArgument('o') == 'o' ? ' -o' : '');
         exec($command, $out, $result);
         if ($result == 0) {

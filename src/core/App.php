@@ -74,6 +74,7 @@ class App
         }
 
 
+        //@TODO when db library is actived
         \ActiveRecord\Config::initialize(function ($cfg) {
             $cfg->set_model_directory(AppConfig::MDIR);
             $cfg->set_connections(
