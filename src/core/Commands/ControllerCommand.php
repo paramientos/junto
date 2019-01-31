@@ -17,9 +17,9 @@ class ControllerCommand extends Command
     public function configure()
     {
         $this->setName('c:c')
-            ->setDescription('This command runs the composer dump-autoload script.')
-            ->setHelp('With this command you can manage the dependencies through the composer.')
-            ->addArgument('controllerName', InputArgument::OPTIONAL, 'You can use <info>o</info> for optimize the process');
+            ->setDescription('Generates controller file.')
+            ->setHelp('Generates a controller file in the Controllers folder.')
+            ->addArgument('controllerName', InputArgument::OPTIONAL, 'Controller name to generate');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
