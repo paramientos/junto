@@ -14,7 +14,8 @@
     "filp/whoops": "^2.3",
     "marc-mabe/php-enum": "^3.0",
     "fleshgrinder/format": "^1.1",
-    "php-activerecord/php-activerecord": "^1.2"
+    "php-activerecord/php-activerecord": "^1.2",
+    "symfony/console": "^4.2"
   },
   "autoload": {
     "classmap": [

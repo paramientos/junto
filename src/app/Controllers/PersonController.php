@@ -11,23 +11,14 @@ class PersonController extends Controller
     public function indexAction($id)
     {
 
-        $areas = Area::all();
-        foreach ($areas as $area) {
-            echo $area->area_id;
-        }
-
-
-        //$user=$this->model('user');
-        //var_dump($user->all()->getRows());
-
-        //echo $id;
-        //redirect('default','index');
-        //var_dump($this->url->redirect('default', 'index'));
-        //var_dump($this->request->get);
-        /*$data['title'] = 'Person';
+        $data['area'] = Area::first();
+        $data['title'] = 'Person';
         $data['text'] = 'Person sayfasından merhaba!';
 
-        $this->render('home', $data);*/
+
+        //Area::create(['name' => 'Soysal']);
+
+        $this->render('home', $data);
     }
 
     public function postAction($id)
