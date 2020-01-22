@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://metroui.org.ua/themes/pandora/vendors/metro4/css/metro-all.css">
     <link rel="stylesheet" href="https://metroui.org.ua/themes/pandora/css/index.css">
 
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/metro-blue/easyui.css">
-
-
 
     <title>Pandora - Admin template build with Metro 4</title>
 
