@@ -38,14 +38,13 @@ class Controller
 
 
     /**
-     * View dosyası çağırmamıza yarayan metod
-     * @param string $file dosyasını adını alır
-     * @param array $params parametreleri alır
-     * @return void view sınıfından render metodu döner
+     * @param $file
+     * @param array $params
+     * @throws \Exception
      */
-    public function render($file, array $params = [])
+    public function render(string $file, array $params = []): void
     {
-        return View::render($file, $params);
+        View::render($file, $params);
     }
 
     /**
@@ -53,10 +52,11 @@ class Controller
      * @param string $file dosyasını adını alır
      * @param array $params parametreleri alır
      * @return void view sınıfından render metodu döner
+     * @throws \Exception
      */
-    public function partialRender($file, array $params = [])
+    public function partialRender(string $file, array $params = []): void
     {
-        return View::partialRender($file, $params);
+        View::partialRender($file, $params);
     }
 
     /**
@@ -64,7 +64,7 @@ class Controller
      * @param string $model model dosyası adı
      * @return void model sınıfı
      */
-    public function model($model)
+    public function model(string $model): \stdClass
     {
         /**
          * Eğer model dosyası varsa

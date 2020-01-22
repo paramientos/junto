@@ -29,8 +29,8 @@ class AppConfig
     const CDIR = self::APP_DIR . self::DS . 'Controllers'; // Controller dizini
 
 
-    const HEADER_FILE = 'header.php';// header file.
-    const FOOTER_FILE = 'footer.php';// footer file
+    const HEADER_FILE = 'common' . self::DS . 'header.php';// header file.
+    const FOOTER_FILE = 'common' . self::DS . 'footer.php';// footer file
 
 // Veritabanı ayarlamalarını yapıyoruz
 // Eğer ki veritabanı işlemi yapmayacaksak ayarlamak şart değil

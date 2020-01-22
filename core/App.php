@@ -96,7 +96,7 @@ class App
     public function run()
     {
         // Eğer Controller dosyası varsa $file değişkenini yol olarak belirle
-        if (file_exists($file = AppConfig ::CDIR . AppConfig::DS . "{$this->controller}.php")) {
+        if (file_exists($file = AppConfig::CDIR . AppConfig::DS . "{$this->controller}.php")) {
             // Dosyayı sistemimize dahil edelim
             require_once $file;
             // Eğer sınıf yaratılmışsa/varsa controller'ımızı çağıralım

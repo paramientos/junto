@@ -1,4 +1,5 @@
 <?php
+
 namespace Endocore\Core;
 
 use Endocore\App\Config;
@@ -6,12 +7,13 @@ use Endocore\App\Configs\AppConfig;
 
 class View
 {
+
     /**
-     * Full görünüm dosyasını yorumlayan metod
-     * @param string $view görünüm dosyası
-     * @param array $params parametreler
+     * @param $view
+     * @param array $params
+     * @throws \Exception
      */
-    public static function render($view, array $params = [])
+    public static function render($view, array $params = []) : void
     {
         // check header file
         if (file_exists($file = AppConfig::VDIR . AppConfig::DS . AppConfig::HEADER_FILE)) {
@@ -50,7 +52,7 @@ class View
      * @param $view
      * @param array $params
      */
-    public static function partialRender($view, array $params = [])
+    public static function partialRender($view, array $params = []) : void
     {
         /**
          * Eğer dosya varsa
@@ -80,6 +82,7 @@ class View
              * Dosya yoksa programı sonlandır
              */
         } else {
-            throw new \Exception("Görünüm dosyası bulunamadı: $view");        }
+            throw new \Exception("Görünüm dosyası bulunamadı: $view");
+        }
     }
 }
