@@ -16,19 +16,46 @@
 
 <div class="row m-3">
 
-        <table id="dg" title="Servers" class="easyui-datagrid" style="width:85%;height:250px"
-               toolbar="#toolbar" pagination="true"
-               rownumbers="true" fitColumns="true" singleSelect="true">
-            <thead>
-            <tr>
-                <th field="host_name" width="50">Hostname</th>
-                <th field="alias_name" width="50">Alias</th>
-                <th field="user_name" width="50">Username</th>
-            </tr>
-            </thead>
-        </table>
+    <div id="datatable"></div>
 
 
+</div>
+
+
+<div class="dialog" data-role="dialog" id="demoDialog1">
+    <div class="dialog-title">Use Windows location service?</div>
+    <div class="dialog-content">
+
+        <form>
+            <div class="form-group">
+                <label>ss</label>
+                <select data-role="select">
+                    <option value="dedicated_corei3_hp">Core i3 (hp)</option>
+                    <option value="dedicated_pentium_hp">Pentium (hp)</option>
+                    <option value="dedicated_smart_corei3_hp">Smart Core i3 (hp)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" placeholder="Enter email"/>
+                <small class="text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter email"/>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" data-role="checkbox" data-caption="Remember me">
+            </div>
+        </form>
+
+    </div>
+
+    <div class="dialog-actions">
+        <button class="button primary js-dialog-close">Save</button>
+        <button class="button  js-dialog-close">Close</button>
+    </div>
 </div>
 
 
@@ -37,8 +64,27 @@
 
     window.onload = function () {
 
-        GET('http://localhost:8000/api/servers', {}, function (data) {
-            $('#dg').datagrid('loadData', data);
+        $("#datatable").greed({
+            url: 'http://localhost:8000/api/servers',
+            highlightRow: true,
+            editButton: function (row, index) {
+                Metro.dialog.open('#demoDialog1');
+            },
+            deleteButton: function (row, index) {
+
+            },
+            cols: [
+                {
+                    key: "alias_name",
+                    title: "Alias Name",
+                    sort: true
+                },
+                {
+                    key: "host_name",
+                    title: "Hostname",
+                    sort: true
+                }
+            ]
         });
 
 

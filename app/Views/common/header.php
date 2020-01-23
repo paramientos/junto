@@ -8,7 +8,8 @@
     <!-- Metro 4 -->
     <link rel="stylesheet" href="https://metroui.org.ua/themes/pandora/vendors/metro4/css/metro-all.css">
     <link rel="stylesheet" href="https://metroui.org.ua/themes/pandora/css/index.css">
-
+    <link rel="stylesheet" href="<?php echo get_app_url('/Public/css/greed.css'); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Pandora - Admin template build with Metro 4</title>
 

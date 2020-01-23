@@ -1,0 +1,26 @@
+.greed {
+    width: 100%;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #ffcc00;
+    border-style: solid;
+    color: #000000;
+}
+
+.greed td, table.greed th {
+    border-width: 2px;
+    border-color: #ffcc00;
+    border-style: solid;
+    padding: 3px;
+}
+
+.greed thead {
+    background-color: #ffcc00;
+}
+
+.greed tr.hover {
+    background-color: rgba(255, 202, 0, 0.15);
+    cursor: pointer;
+}
+

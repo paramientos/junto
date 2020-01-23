@@ -14,7 +14,7 @@ class AppConfig
 
     const ENV = Environment::DEV;
 
-    const BASE_URL = 'http://localhost/endocore'; // Sistemin çalışacağı URL
+    const BASE_URL = 'http://localhost:9000'; // Sistemin çalışacağı URL
 
     //tum hardcodedlar dynamic olacak constants yani
     const ROOT_DIR = __DIR__ . '/..'; // Kök dizin

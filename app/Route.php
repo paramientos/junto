@@ -37,7 +37,7 @@ class Route
 
     private function makeRoute($route, $controller, $action)
     {
-        array_push(self::$routes, [$route => "{$controller}Controller:{$action}Action"]);
+        array_push(self::$routes, [$route => "{$controller}:{$action}Action"]);
     }
 
 
