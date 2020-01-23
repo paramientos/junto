@@ -14,12 +14,8 @@
     </div>
 </div>
 
-<div class="row m-3">
 
-    <div id="datatable"></div>
-
-
-</div>
+<table id="datatable" style="width: 99%"></table>
 
 
 <div class="dialog" data-role="dialog" id="demoDialog1">
@@ -38,12 +34,12 @@
 
             <div class="form-group">
                 <label>Email address</label>
-                <input type="email" placeholder="Enter email"/>
+                <input type="email" placeholder="Enter email" id="txtHostName"/>
                 <small class="text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" placeholder="Enter email"/>
+                <input type="text" placeholder="Enter email" id="txtAliasName"/>
             </div>
             <div class="form-group">
                 <input type="checkbox" data-role="checkbox" data-caption="Remember me">
@@ -69,6 +65,8 @@
             highlightRow: true,
             editButton: function (row, index) {
                 Metro.dialog.open('#demoDialog1');
+                $("#txtHostName").val(row.host_name);
+                $("#txtAliasName").val(row.alias_name);
             },
             deleteButton: function (row, index) {
 

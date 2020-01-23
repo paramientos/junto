@@ -121,7 +121,7 @@ $.fn.greed = function (opts) {
     tableHeader += "<thead><tr>";
 
     $.map(options.cols, function (col, colIndex) {
-        const colSize = typeof col.size === "undefined" ? 50 : col.size;
+        const colSize = typeof col.size === "undefined" ? "auto" : col.size;
         const display = typeof col.hide === "undefined" ? 'table-cell' : col.hide ? 'none' : 'table-cell';
         const sort = typeof col.sort === "undefined" ? false : col.sort;
         const uuid = $.fn.greedhelper.uuidv4();
