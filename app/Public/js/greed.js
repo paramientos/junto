@@ -1,4 +1,3 @@
-
 $.fn.greedhelper = {
 
     uuidv4: function () {
@@ -90,21 +89,21 @@ $.fn.greed = function (opts) {
 
     let options = $.extend({
         url: '',
-        highlightRow: true,
+        hover: true,
         editButton: null, //func
         deleteButton: null, //func
         cols: [],
         data: [],
-        success: null //func
+        success: null, //func,
+        styler: null, // func
+        dblClick: null
     }, opts);
 
-    $.fn.greedhelper.get(options.url, {}, function (data) {
-       setBody(data);
-    });
 
     elm.addClass("greed");
 
-    if (options.highlightRow) {
+
+    if (options.hover) {
         $(function () {
             $("tr:not(:has(th))").mouseover(function () {
                 $(this).addClass("hover");
@@ -114,6 +113,10 @@ $.fn.greed = function (opts) {
             });
         });
     }
+
+    $.fn.greedhelper.get(options.url, {}, function (data) {
+        setBody(data);
+    });
 
 
     let tableHeader = "";
@@ -144,14 +147,29 @@ $.fn.greed = function (opts) {
     function setBody(data) {
         let tableBody = '';
         $.map(data, function (row, rowIndex) {
-            tableBody += "<tr>";
+            const rowId = "act" + $.fn.greedhelper.uuidv4();
+            tableBody += "<tr id='" + rowId + "'>";
 
             $.map(options.cols, function (col, colIndex) {
                 const display = typeof col.hide === "undefined" ? 'table-cell' : col.hide ? 'none' : 'table-cell';
-                if (display === 'table-cell') {
-                    tableBody += `<td>${row[col.key]}</td>`;
+
+                let cellValue = row[col.key];
+
+                if (typeof col.styler === "function") {
+                    cellValue = col.styler(cellValue);
                 }
+
+                if (display === 'table-cell') {
+                    tableBody += `<td>${cellValue}</td>`;
+                }
+
             });
+
+            if (typeof options.dblClick === "function") {
+                $("body").on('dblclick', '#' + rowId, function () {
+                    options.dblClick(row, rowIndex);
+                });
+            }
 
 
             tableBody += '<th style="width: 60px;">';

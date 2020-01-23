@@ -62,7 +62,7 @@
 
         $("#datatable").greed({
             url: 'http://localhost:8000/api/servers',
-            highlightRow: true,
+            hover: true,
             editButton: function (row, index) {
                 Metro.dialog.open('#demoDialog1');
                 $("#txtHostName").val(row.host_name);
@@ -70,6 +70,10 @@
             },
             deleteButton: function (row, index) {
 
+            },
+            dblClick: function (row, index) {
+                console.log(row);
+                this.editButton(row, index);
             },
             cols: [
                 {
@@ -80,7 +84,14 @@
                 {
                     key: "host_name",
                     title: "Hostname",
-                    sort: true
+                    sort: true,
+                    styler: function (cell) {
+                        if (cell == 'rmxoracle1') {
+                            return "<span style='color:red'>" + cell + "</span>";
+                        } else {
+                            return cell;
+                        }
+                    }
                 }
             ]
         });

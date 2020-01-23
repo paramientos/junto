@@ -14,7 +14,7 @@ class AppConfig
 
     const ENV = Environment::DEV;
 
-    const BASE_URL = 'http://localhost:9000'; // Sistemin çalışacağı URL
+    const BASE_URL = 'http://localhost/endocore'; // Sistemin çalışacağı URL
 
     //tum hardcodedlar dynamic olacak constants yani
     const ROOT_DIR = __DIR__ . '/..'; // Kök dizin
@@ -37,8 +37,8 @@ class AppConfig
     const DB_TYPE = 'mysqli';
     const DB_HOST = 'localhost';
     const DB_USR = 'root';
-    const DB_PWD = '1';
-    const DB_NAME = 'blsh';
+    const DB_PWD = 'root';
+    const DB_NAME = 'rmx';
     const DB_PORT = '3306';
     const DB_CHARSET = 'utf8';
 
