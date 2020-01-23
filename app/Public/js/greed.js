@@ -1,3 +1,4 @@
+
 $.fn.greedhelper = {
 
     uuidv4: function () {
@@ -89,21 +90,21 @@ $.fn.greed = function (opts) {
 
     let options = $.extend({
         url: '',
-        hover: true,
+        highlightRow: true,
         editButton: null, //func
         deleteButton: null, //func
         cols: [],
         data: [],
-        success: null, //func,
-        styler: null, // func
-        dblClick: null
+        success: null //func
     }, opts);
 
+    $.fn.greedhelper.get(options.url, {}, function (data) {
+       setBody(data);
+    });
 
     elm.addClass("greed");
 
-
-    if (options.hover) {
+    if (options.highlightRow) {
         $(function () {
             $("tr:not(:has(th))").mouseover(function () {
                 $(this).addClass("hover");
@@ -113,10 +114,6 @@ $.fn.greed = function (opts) {
             });
         });
     }
-
-    $.fn.greedhelper.get(options.url, {}, function (data) {
-        setBody(data);
-    });
 
 
     let tableHeader = "";
@@ -159,10 +156,10 @@ $.fn.greed = function (opts) {
                     cellValue = col.styler(cellValue);
                 }
 
+
                 if (display === 'table-cell') {
                     tableBody += `<td>${cellValue}</td>`;
                 }
-
             });
 
             if (typeof options.dblClick === "function") {
@@ -170,6 +167,7 @@ $.fn.greed = function (opts) {
                     options.dblClick(row, rowIndex);
                 });
             }
+
 
 
             tableBody += '<th style="width: 60px;">';

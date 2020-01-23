@@ -79,7 +79,10 @@
                 {
                     key: "alias_name",
                     title: "Alias Name",
-                    sort: true
+                    sort: true,
+                    styler: function (cell) {
+                            return "<b>"+cell+"</b>"
+                    },
                 },
                 {
                     key: "host_name",
