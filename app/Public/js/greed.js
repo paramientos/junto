@@ -79,6 +79,17 @@ $.fn.greedhelper = {
 
 
         });
+    },
+
+    filter: function (tableId) {
+        const txtFilterId = $.fn.greedhelper.uuidv4();
+        $("#" + tableId).prepend(`<input type="text" id="${txtFilterId}">`);
+        $("#" + txtFilterId).on("keyup", function () {
+            const value = $(this).val().toLowerCase();
+            $("#" + tableId + " tr").not('thead tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
     }
 
 };
@@ -101,13 +112,6 @@ $.fn.greed = function (opts) {
         throw "GREED says : You cannot use both url and data parameters";
     }
 
-    if (options.url && typeof options.url !== "undefined") {
-        $.fn.greedhelper.get(options.url, {}, function (data) {
-            setBody(data);
-        });
-    } else if (options.data && typeof options.data !== "undefined") {
-        setBody(options.data);
-    }
 
     elm.addClass("greed");
 
@@ -122,6 +126,11 @@ $.fn.greed = function (opts) {
         });
     }
 
+    const filter = typeof options.filter === "undefined" ? false : options.filter;
+
+    if (filter) {
+        $.fn.greedhelper.filter(elm.attr("id"));
+    }
 
     let tableHeader = "";
 
@@ -138,6 +147,7 @@ $.fn.greed = function (opts) {
         if (sort) {
             $.fn.greedhelper.sort(uuid, col.title);
         }
+
     });
 
     if (typeof options.editButton === "function") {
@@ -145,14 +155,22 @@ $.fn.greed = function (opts) {
     }
 
     tableHeader += "<tr></thead>";
+
     elm.append(tableHeader);
 
+    if (options.url && typeof options.url !== "undefined") {
+        $.fn.greedhelper.get(options.url, {}, function (data) {
+            setBody(data);
+        });
+    } else if (options.data && typeof options.data !== "undefined") {
+        setBody(options.data);
+    }
 
     function setBody(data) {
         let tableBody = '';
         $.map(data, function (row, rowIndex) {
             const rowId = "act" + $.fn.greedhelper.uuidv4();
-            tableBody += "<tr id='" + rowId + "'>";
+            tableBody += "<tbody><tr id='" + rowId + "'>";
 
             $.map(options.cols, function (col, colIndex) {
                 const display = typeof col.hide === "undefined" ? 'table-cell' : col.hide ? 'none' : 'table-cell';
@@ -197,7 +215,7 @@ $.fn.greed = function (opts) {
 
             tableBody += "</tr>";
         });
-        elm.append(tableBody);
+        elm.append("<tbody>" + tableBody + "</tbody>");
 
         $(".greed-edit-button, .greed-delete-button").css("cursor", "pointer");
 

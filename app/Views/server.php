@@ -60,10 +60,15 @@
 
     window.onload = function () {
 
+
         let data = [
             {
-                alias_name: "Test",
-                host_name: "Sosi"
+                alias_name: "Server 1",
+                host_name: "server1"
+            },
+            {
+                alias_name: "Server 2",
+                host_name: "server2"
             }
         ];
 
@@ -82,6 +87,7 @@
                 console.log(row);
                 this.editButton(row, index);
             },
+            filter: true,
             cols: [
                 {
                     key: "alias_name",
@@ -96,7 +102,7 @@
                     title: "Hostname",
                     sort: true,
                     styler: function (cell) {
-                        if (cell === 'rmxoracle1') {
+                        if (cell === 'server1') {
                             return "<span style='color:red'>" + cell + "</span>";
                         } else {
                             return cell;
