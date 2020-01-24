@@ -1,4 +1,3 @@
-
 $.fn.greedhelper = {
 
     uuidv4: function () {
@@ -89,18 +88,26 @@ $.fn.greed = function (opts) {
     let elm = $(this);
 
     let options = $.extend({
-        url: '',
+        url: undefined,
         highlightRow: true,
         editButton: null, //func
         deleteButton: null, //func
         cols: [],
-        data: [],
+        data: undefined,
         success: null //func
     }, opts);
 
-    $.fn.greedhelper.get(options.url, {}, function (data) {
-       setBody(data);
-    });
+    if (typeof options.url !== "undefined" && typeof options.data !== "undefined") {
+        throw "GREED says : You cannot use both url and data parameters";
+    }
+
+    if (options.url && typeof options.url !== "undefined") {
+        $.fn.greedhelper.get(options.url, {}, function (data) {
+            setBody(data);
+        });
+    } else if (options.data && typeof options.data !== "undefined") {
+        setBody(options.data);
+    }
 
     elm.addClass("greed");
 
@@ -168,13 +175,11 @@ $.fn.greed = function (opts) {
                 });
             }
 
-
-
             tableBody += '<th style="width: 60px;">';
 
             if (typeof options.editButton === "function") {
                 const actionId = "act" + $.fn.greedhelper.uuidv4();
-                tableBody += `<i  id="${actionId}" class="fa fa-pencil-square-o" aria-hidden="true"></i> `;
+                tableBody += `<i  id="${actionId}" class="greed-edit-button fa fa-pencil-square-o" aria-hidden="true"></i> `;
                 $("body").on('click', "#" + actionId, function () {
                     options.editButton(row, rowIndex);
                 });
@@ -182,7 +187,7 @@ $.fn.greed = function (opts) {
 
             if (typeof options.deleteButton === "function") {
                 const actionId = "act" + $.fn.greedhelper.uuidv4();
-                tableBody += `<i  id="${actionId}" class="fa fa-trash" aria-hidden="true"></i> `;
+                tableBody += `<i  id="${actionId}" class="greed-delete-button fa fa-trash" aria-hidden="true"></i> `;
                 $("body").on('click', "#" + actionId, function () {
                     options.deleteButton(row, rowIndex);
                 });
@@ -193,6 +198,9 @@ $.fn.greed = function (opts) {
             tableBody += "</tr>";
         });
         elm.append(tableBody);
+
+        $(".greed-edit-button, .greed-delete-button").css("cursor", "pointer");
+
     }
 
 };

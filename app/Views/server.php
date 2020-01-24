@@ -60,8 +60,15 @@
 
     window.onload = function () {
 
+        let data = [
+            {
+                alias_name: "Test",
+                host_name: "Sosi"
+            }
+        ];
+
         $("#datatable").greed({
-            url: 'http://localhost:8000/api/servers',
+            data: data,
             hover: true,
             editButton: function (row, index) {
                 Metro.dialog.open('#demoDialog1');
@@ -81,7 +88,7 @@
                     title: "Alias Name",
                     sort: true,
                     styler: function (cell) {
-                            return "<b>"+cell+"</b>"
+                        return "<b>" + cell + "</b>"
                     },
                 },
                 {
@@ -89,7 +96,7 @@
                     title: "Hostname",
                     sort: true,
                     styler: function (cell) {
-                        if (cell == 'rmxoracle1') {
+                        if (cell === 'rmxoracle1') {
                             return "<span style='color:red'>" + cell + "</span>";
                         } else {
                             return cell;
