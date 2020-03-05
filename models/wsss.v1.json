@@ -1,0 +1,15 @@
+{
+  "title": "wsss",
+  "type": "object",
+  "properties": {
+    "userame": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    }
+  },
+  "x-examples": {
+    "example-1": {}
+  }
+}
